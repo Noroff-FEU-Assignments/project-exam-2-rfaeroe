@@ -1,0 +1,40 @@
+@import './partials/container';
+@import './partials/nav';
+@import './partials/wrapper';
+@import './partials/hero';
+@import './partials/form';
+@import './partials/button';
+@import './partials/bookingbox';
+@import './partials/row';
+@import './partials/col';
+@import './partials/pageheading';
+@import './partials/explorebergen';
+@import './partials/card';
+@import './partials/sectionwrapper';
+@import './partials/establishments';
+@import './partials/footer';
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    text-decoration: none;
+}
+
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+
+
+a{
+    color: inherit;
+}
+
+body{
+    font-family: sans-serif;
+    background: #f2f2f2;
+    
+}
+

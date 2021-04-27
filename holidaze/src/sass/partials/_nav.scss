@@ -1,0 +1,19 @@
+nav{
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    a{
+        color: #fff;
+        padding: 0 1rem;
+    }
+
+    .logo{
+        font-weight: bold;
+    }
+
+    .nav-links{
+        display: flex;
+        justify-content: flex-end;
+    }
+}

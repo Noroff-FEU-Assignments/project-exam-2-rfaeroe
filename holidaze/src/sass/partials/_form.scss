@@ -1,0 +1,62 @@
+.login-form-wrapper{
+    max-width: 320px;
+    padding: 2rem;
+    margin: 0 auto;
+    background: #003BA1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+fieldset{
+    border-color: ¤;
+}
+
+.form-wrapper{
+    max-width: 558px;
+    padding: 2rem;
+    margin: 0 auto;
+    background: #003BA1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.form {
+    width: 100%;
+    .form-group{
+        margin: 1rem auto;
+
+        input, select, textarea{
+            padding: 0.5rem;
+            width: 100%;
+        }
+
+        p{
+            color: red;
+            margin: 5px auto;
+            font-size: 14px;
+        }
+    }
+}
+
+.form-right{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    li{
+        margin: 1rem auto;
+        
+        svg{
+            font-size: 40px;
+            color: #FE981E;
+        }
+        
+        
+        p{
+            color: #fff;
+            font-size: 15px;
+        }
+    }
+}

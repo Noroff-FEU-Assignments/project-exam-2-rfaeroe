@@ -1,0 +1,25 @@
+footer{
+    background: #003BA1;
+ 
+
+    .footer-inner{
+        height: 320px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        margin-bottom: 0;
+
+        .footer-brand{
+            text-align: center;
+        }
+
+        .footer-contact{
+            text-align: right;
+        }
+
+        .footer-list-item{
+            padding: 12px 0;
+        }
+    }
+}
