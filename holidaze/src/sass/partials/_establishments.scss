@@ -1,3 +1,50 @@
 .establishments{
-    padding: 156px 0;
+    padding: 96px 0;
+}
+
+.establishment-item{
+    width: 100%;
+    padding: 1rem;
+    
+    .establishment-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .establishment-left{
+        display: flex;
+        width: 50%;
+        justify-content: flex-start;
+        align-items: center;
+        background: #fff;
+    }
+
+    .establishment-right{
+        display: flex;
+        width: 50%;
+        align-items: center;
+        justify-content: flex-end;
+        background: #003ba1;
+    }
+
+    .establishment-name{
+        padding: 0 1rem;
+        font-size: 14px;
+    }
+
+    .establishment-image{
+        max-width: 100%;
+        width: 54px;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .establishment-button{
+        margin: 0.5rem;
+        width: 80px;
+        font-size: 14px;
+        font-weight: normal;
+    }
+
 }

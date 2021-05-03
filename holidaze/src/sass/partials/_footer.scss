@@ -1,24 +1,40 @@
 footer{
-    background: #003BA1;
+ 
  
 
     .footer-inner{
-        height: 320px;
+        background: #003BA1;
         display: flex;
         justify-content: space-between;
         align-items: center;
         color: #fff;
         margin-bottom: 0;
+        flex-wrap: wrap;
+        padding: 2rem 0;
 
-        .footer-brand{
+        .footer-nav{
+            flex-basis: 100%;
             text-align: center;
         }
 
+        .footer-list{
+           
+        }
+
+        .footer-brand{
+            text-align: center;
+            flex-basis: 100%;
+            margin: 2rem auto;
+        }
+
         .footer-contact{
-            text-align: right;
+            text-align: center;
+            flex-basis: 100%;
+   
         }
 
         .footer-list-item{
+            flex-basis: 100%;
             padding: 12px 0;
         }
     }

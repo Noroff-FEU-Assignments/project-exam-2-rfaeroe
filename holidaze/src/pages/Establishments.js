@@ -4,10 +4,11 @@ import axios from 'axios';
 import { BASE_URL, ESTABLISHMENTS_PATH } from '../utils/constants';
 import Item from '../components/Item';
 
-
+import EnquiryForm from '../components/EnquiryForm';
 
 const Establishments = () => {
     const [establish, setEstablishments] = useState([]);
+
 
     useEffect(() => {
         const getEstablishments = async () => {
@@ -20,11 +21,19 @@ const Establishments = () => {
             }
 
         };
-
-
         getEstablishments();
     }, []);
 
+    
+const sortArray = type => {
+    const types = {
+      establishment_price: 'establishment_price',
+    };
+    const sortProperty = types[type];
+    const sorted = [...establish].sort((a, b) => b[sortProperty] - a[sortProperty]);
+    console.log(sorted);
+    setEstablishments(sorted);
+  };
 
 
 
@@ -33,65 +42,12 @@ const Establishments = () => {
         <div className={"container"}>
             <h1 className={"pageheading"}>Find accomodations in <span>Bergen</span></h1>
 
-            <form className="form booking-box">
-                <div className="form-inner booking-box-inner">
-                    <div className="row">
-                        <div className="search-box form-group col-d-6">
-                            <label>Place</label>
-                            <input className="booking-box-search-input"></input>
-                        </div>
-                        <div className="search-box form-group col-d-3">
-                            <label>Adults</label>
-                            <select className="booking-box-option" id="adults">
-                                <option className="option" value hidden></option>
-                                <option className="option" value="0">0</option>
-                                <option className="option" value="1">1</option>
-                                <option className="option" value="2">2</option>
-                                <option className="option" value="3">3</option>
-                                <option className="option" value="4">4</option>
-                                <option className="option" value="5">5</option>
-                                <option className="option" value="6">6</option>
-                                <option className="option" value="7">7</option>
-                                <option className="option" value="8">8</option>
-                                <option className="option" value="9">9</option>
-                                <option className="option" value="10">10</option>
-                            </select>
-                        </div>
-                        <div className="search-box form-group col-d-3">
-                            <label>Children</label>
-                            <select className="booking-box-option" id="children">
-                                <option className="option" value hidden></option>
-                                <option className="option" value="0">0</option>
-                                <option className="option" value="1">1</option>
-                                <option className="option" value="2">2</option>
-                                <option className="option" value="3">3</option>
-                                <option className="option" value="4">4</option>
-                                <option className="option" value="5">5</option>
-                                <option className="option" value="6">6</option>
-                                <option className="option" value="7">7</option>
-                                <option className="option" value="8">8</option>
-                                <option className="option" value="9">9</option>
-                                <option className="option" value="10">10</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="booking-box-date form-group col-d-6">
-                            <label className="date-label" for="datefrom">From</label>
-                            <input className="booking-box-date-input" type="date" name="datefrom" value></input>
-                        </div>
-                        <div className="booking-box-date form-group col-d-6">
-                            <label className="date-label" for="dateto">To</label>
-                            <input className="booking-box-date-input" type="date" name="dateto" value></input>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <button type="submit" className="button">Find accomodation</button>
-                    </div>
-                </div>
-            </form>
-
-            <div className={"establishments sectionwrapper row"}>
+            <EnquiryForm/>
+            <div className={"establishments row"}>
+            <select onChange={(e) => sortArray(e.target.value)}>
+                <option value="default">Price - Low to High</option>
+                <option value="establishment_price">Price - High to Low</option>
+            </select>
                 {establish.map((est) => {
                     return (
                         <div className={"establishments-card col-d-6"} key={est.id}>
@@ -102,10 +58,7 @@ const Establishments = () => {
                                 name={est.establishment_name}
                                 price={est.establishment_price}
                                 description={est.establishment_description}
-
                             />
-
-
                         </div>
                     );
                 })}

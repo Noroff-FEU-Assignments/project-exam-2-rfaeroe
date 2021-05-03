@@ -14,22 +14,31 @@ fieldset{
 
 .form-wrapper{
     max-width: 558px;
-    padding: 2rem;
+    padding: 1rem;
     margin: 0 auto;
-    background: #003BA1;
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
 .form {
+    order: 2;
+    background: #003BA1;
+    padding: 1.5rem;
     width: 100%;
     .form-group{
         margin: 1rem auto;
 
         input, select, textarea{
-            padding: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 0;
             width: 100%;
+        }
+
+        textarea{
+            height: 80px;
         }
 
         p{
@@ -41,22 +50,31 @@ fieldset{
 }
 
 .form-right{
+    order: 1;
     display: flex;
     flex-direction: column;
     text-align: center;
+    background: #003BA1;
+    width: 100%;
 
-    li{
-        margin: 1rem auto;
-        
-        svg{
-            font-size: 40px;
-            color: #FE981E;
-        }
-        
-        
-        p{
-            color: #fff;
-            font-size: 15px;
+    .contact-list{
+        padding: 1.5rem;
+
+        .contact-list-item{
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+
+            svg{
+                font-size: 40px;
+                color: #FE981E;
+            }
+
+            p{
+                color: #fff;
+                font-size: 15px;
+                margin: 0.75rem auto;
+            }
         }
     }
+
 }

@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Establishments from './pages/Establishments';
 import EstablishmentDetail from './pages/EstablishmentDetail';
 import Contact from './pages/Contact';
+import AdminPage from './pages/Admin';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/establishments' component={Establishments} />
           <Route path='/est/:id' component={EstablishmentDetail} />
           <Route path='/contact' component={Contact} />
+          <Route path='/admin' component={AdminPage} />
           <Route path='/login' component={Login} />
         </Switch>
         <Footer />

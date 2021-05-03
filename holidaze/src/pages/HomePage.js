@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BASE_URL, ESTABLISHMENTS_PATH } from '../utils/constants';
 import axios from 'axios';
-
+import { Link } from "react-router-dom";
 
 import bikeImage from "../media/bike.svg";
 import cableCarImage from "../media/cable-car.svg";
@@ -10,80 +10,75 @@ import boatImage from "../media/boat.svg";
 
 
 const HomePage = () => {
-    useEffect(() => {
-        axios
-            .get(`${BASE_URL}${ESTABLISHMENTS_PATH}`)
-            .then(response => console.log(response));
-    }, []);
+    const [establishments, setEstablishments] = useState([])
+    const [filter, setFilter] = useState(null);
+    const [isFiltered, setIsFiltered] = useState(false);
+    const [display, setDisplay] = useState(true);
+    const [query, setQuery] = useState(true);
 
-    return (
+    
+
+    useEffect(() => {
+        const getEstablishments = async ()=>{
+            try {
+                const response = await axios.get(`${BASE_URL}${ESTABLISHMENTS_PATH}`)
+                setEstablishments(response.data);
+            }
+            catch (e){
+            }
+            finally{
+
+            }
+        }
+        getEstablishments()
+    }, [query]);
+    
+
+    const handleFiltering = (e) => {
+        let filterEstablishments = establishments.filter(est => {
+          return est.establishment_name
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase());
+        });
+        setEstablishments(filterEstablishments);
+        setIsFiltered(true);
+        setDisplay(false)
+        
+        if (e.target.value < 1){
+            setQuery(!query)
+        }
+      };
+
+      const showTypeahead =()=>{
+        setDisplay(false)
+      }
+
+
+console.log(establishments);
+    return (   
         <>
             <div className="hero">
                 <div id="color-overlay"></div>
                 <h1 className={"pageheading"}>Find accomodations in <span>Bergen</span></h1>
-                <form className="form booking-box">
-                    <div className="form-inner booking-box-inner">
-                        <div className="row">
-                            <div className="search-box form-group col-d-6">
-                                <label>Place</label>
-                                <input className="booking-box-search-input"></input>
-                            </div>
-                            <div className="search-box form-group col-d-3">
-                                <label>Adults</label>
-                                <select className="booking-box-option" id="adults">
-                                    <option className="option" value hidden></option>
-                                    <option className="option" value="0">0</option>
-                                    <option className="option" value="1">1</option>
-                                    <option className="option" value="2">2</option>
-                                    <option className="option" value="3">3</option>
-                                    <option className="option" value="4">4</option>
-                                    <option className="option" value="5">5</option>
-                                    <option className="option" value="6">6</option>
-                                    <option className="option" value="7">7</option>
-                                    <option className="option" value="8">8</option>
-                                    <option className="option" value="9">9</option>
-                                    <option className="option" value="10">10</option>
-                                </select>
-                            </div>
-                            <div className="search-box form-group col-d-3">
-                                <label>Children</label>
-                                <select className="booking-box-option" id="children">
-                                    <option className="option" value hidden></option>
-                                    <option className="option" value="0">0</option>
-                                    <option className="option" value="1">1</option>
-                                    <option className="option" value="2">2</option>
-                                    <option className="option" value="3">3</option>
-                                    <option className="option" value="4">4</option>
-                                    <option className="option" value="5">5</option>
-                                    <option className="option" value="6">6</option>
-                                    <option className="option" value="7">7</option>
-                                    <option className="option" value="8">8</option>
-                                    <option className="option" value="9">9</option>
-                                    <option className="option" value="10">10</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="booking-box-date form-group col-d-6">
-                                <label className="date-label" for="datefrom">From</label>
-                                <input className="booking-box-date-input" type="date" name="datefrom" value></input>
-                            </div>
-                            <div className="booking-box-date form-group col-d-6">
-                                <label className="date-label" for="dateto">To</label>
-                                <input className="booking-box-date-input" type="date" name="dateto" value></input>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <button type="submit" className="button">Find accomodation</button>
-                        </div>
+    
+                <div className="typehead">
+                    <input className="typehead-input" placeholder="Find your stay in Bergen" type="text" onChange={(handleFiltering)} onFocus={showTypeahead}  tabIndex="0"/>
+                    <div className="typehead-dropdown">
+                        {establishments.map((shit)=>{
+                            return(
+                                <div className="typehead-item" key={shit.id} style={{backgroundColor: "white", display: display? "none": "block" }}>
+                                    <Link className="typehead-item-link" to={`est/${shit.id}`}>{shit.establishment_name}</Link>
+                                </div>
+                            )
+                        })}
                     </div>
-                </form>
+                </div>
+
             </div>
-            <div className="sectionwrapper">
                 <div className="explorebergen">
                     <h2 className="sectiontitle">What does Bergen offer?</h2>
-                    <div className="row">
-                        <div className="card col col-d-3">
+                    <div className="">
+                        <div className="card col col-m-12 col-d-3">
                             <div className="card-inner">
                                 <img
                                     src={bikeImage}
@@ -94,7 +89,7 @@ const HomePage = () => {
                             </div>
                         </div>
 
-                        <div className="card col col-d-3">
+                        <div className="card col col-m-12 col-d-3">
                             <div className="card-inner">
                                 <img
                                     src={cableCarImage}
@@ -105,7 +100,7 @@ const HomePage = () => {
                             </div>
                         </div>
 
-                        <div className="card col col-d-3">
+                        <div className="card col col-m-12 col-d-3">
                             <div className="card-inner">
                                 <img
                                     src={aquariumImage}
@@ -116,7 +111,7 @@ const HomePage = () => {
                             </div>
                         </div>
 
-                        <div className="card col col-d-3">
+                        <div className="card col col-m-12 col-d-3">
                             <div className="card-inner">
                                 <img
                                     src={boatImage}
@@ -128,7 +123,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+         
         </>
     );
 };
