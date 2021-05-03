@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const Item = props => {
     const { id, name, description, price, image} = props;
-    console.log(props);
 
     const history = useHistory();
     const handleClick = (id) => {
@@ -15,7 +14,7 @@ const Item = props => {
             <img className={"card-image"} src={image} alt={name} />
             <div className={"card-inner-content"}>
                 <h2 className={"card-title col-d-12"}>{name}</h2>
-                <p className={"card-price col-d-12"}>{price}$ / Day</p>
+                <p className={"card-price col-d-12"}>{price}$ /night</p>
                 <p className={"card-desc col-d-12"}>{description}</p>
                 <button className={"button card-button col-d-6"}>Book Now</button>
             </div>
