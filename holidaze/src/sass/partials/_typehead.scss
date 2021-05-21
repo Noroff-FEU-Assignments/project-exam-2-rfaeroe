@@ -1,6 +1,11 @@
 .typehead{
     width: 100%;
-    padding: 0 1rem;
+    position: relative;
+
+    .typehead-dropdown{
+        position: absolute;
+        width: 100%;
+    }
 
     .typehead-input{
         width: 100%;
@@ -11,6 +16,17 @@
     .typehead-item{
         padding: 0.75rem;
         font-size: 16px;
+
+
+    }
+
+    .typehead-item-link{
+        outline: none;
+
+     
+        &:focus{
+            background-color: blue;
+        }
     }
 
 }

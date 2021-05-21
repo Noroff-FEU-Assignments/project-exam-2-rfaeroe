@@ -27,4 +27,4 @@ export const establishmentSchema = yup.object().shape({
     establishment_price: yup.number().required('Please provide price for rent'),
     establishment_description: yup.string().required('Please provide a description'),
     establishment_image: yup.string().required('Please provide an image Url'),
-})
+});

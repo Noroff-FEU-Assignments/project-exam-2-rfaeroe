@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import useAxios from '../utils/useAxios';
 import { useState, useEffect } from 'react';
-import Item from './Item';
+import SingleItem from '../components/SingleItem';
 import { ESTABLISHMENTS_PATH } from '../utils/constants';
 
 import { establishmentSchema } from '../utils/schemas';
@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 
 const EditEstablishment = () => {
-    const [product, setProduct] = useState(null);
+    const [establishment, setEstablishment] = useState(null);
     const { id } = useParams();
     const http = useAxios();
 
@@ -29,7 +29,7 @@ const EditEstablishment = () => {
         try {
             const response = await http.put(`${ESTABLISHMENTS_PATH}/${id}`, data);
             console.log('response', response.data);
-            setProduct(response.data);
+            setEstablishment(response.data);
             setSuccess(true);
         } catch (error) {
             console.log('error', error);
@@ -40,19 +40,19 @@ const EditEstablishment = () => {
     };
 
     useEffect(() => {
-        const getProduct = async () => {
+        const getEstablishment = async () => {
             try {
                 const response = await http.get(`${ESTABLISHMENTS_PATH}/${id}`);
                 console.log(response);
-                setProduct(response.data);
+                setEstablishment(response.data);
             } catch (error) {
                 console.log(error);
             }
         };
-        getProduct();
+        getEstablishment();
     }, [id]);
 
-    if (!product) {
+    if (!establishment) {
         return <p>loading product</p>;
     }
 
@@ -64,50 +64,50 @@ const EditEstablishment = () => {
                 <fieldset disabled={submitting}>
                     <div>
                         <input
-                            name='title'
-                            placeholder='Title'
+                            name='establishment_name'
+                            placeholder='Name'
                             ref={register}
-                            defaultValue={product.title}
+                            defaultValue={establishment.establishment_name}
                         />
-                        {errors.title && <p>{errors.title.message}</p>}
+                        {errors.establishment_name && <p>{errors.establishment_name.message}</p>}
                     </div>
 
                     <div>
                         <input
-                            name='price'
+                            name='establishment_price'
                             placeholder='Price'
-                            defaultValue={product.price}
+                            defaultValue={establishment.establishment_price}
                             ref={register}
                             type='number'
                         />
-                        {errors.price && <p>{errors.price.message}</p>}
+                        {errors.establishment_price && <p>{errors.establishment_price.message}</p>}
                     </div>
                     <div>
                         <textarea
-                            name='description'
+                            name='establishment_description'
                             placeholder='Description'
-                            defaultValue={product.description}
+                            defaultValue={establishment.establishment_description}
                             ref={register}
                             type='text'
                         />
-                        {errors.description && <p>{errors.description.message}</p>}
+                        {errors.establishment_description && <p>{errors.establishment_description.message}</p>}
                     </div>
                     <div>
                         <input
-                            name='image_url'
+                            name='establishment_image'
                             placeholder='Image URL'
                             ref={register}
-                            defaultValue={product.image_url}
+                            defaultValue={establishment.establishment_image}
                             type='text'
                         />
-                        {errors.image_url && <p>{errors.image_url.message}</p>}
+                        {errors.establishment_image && <p>{errors.establishment_image.message}</p>}
                     </div>
 
                     <button type='submit'>{submitting ? 'Updating ...' : 'Update'}</button>
                 </fieldset>
             </form>
-            {success ? <p>Listing of {product.title} was updated</p> : null}
-            <Item {...product} />
+            {success ? <p>Listing of {establishment.establishment_name} was updated</p> : null}
+            <SingleItem {...establishment} />
 
         </>
     );

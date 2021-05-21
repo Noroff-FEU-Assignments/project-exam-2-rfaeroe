@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import { BASE_URL, ESTABLISHMENTS_PATH } from "../utils/constants";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import Item from '../components/Item';
+import SingleItem from '../components/SingleItem';
+import EnquiryForm from "../components/EnquiryForm";
+import BookingModal from "../components/BookingModal";
 
 const EstablishmentDetail = () => {
     const [establishment, setEstablishments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [show, setShow] = useState(false);
 
     let history = useHistory();
     const { id } = useParams();
@@ -19,7 +22,6 @@ const EstablishmentDetail = () => {
         const fetchEstablishments = async () => {
             try {
                 const response = await axios.get(url);
-                console.log(response);
                 if (response.status === 200) {
                     setEstablishments(response.data);
                 } else {
@@ -42,13 +44,10 @@ const EstablishmentDetail = () => {
         return <div>ERROR: An error occured</div>;
     }
 
-
-
     return (
         <div className={"establishments sectionwrapper row"}>
             <div className={"establishments-card col-d-12"}>
-                <Item
-                    id={establishment.id}
+                <SingleItem
                     key={establishment.id}
                     image={establishment.establishment_image}
                     name={establishment.establishment_name}
@@ -57,10 +56,12 @@ const EstablishmentDetail = () => {
                     location={establishment.establishment_location}
                     facilities={establishment.establishment_facilities}
                 />
-
+                <button key={establishment.id} onClick={() => setShow(true)} className={"button establishment-button"} >
+                    Book
+                </button>
+                <BookingModal onClose={() => setShow(false)} show={show} />
             </div>
         </div>
-
     );
 };
 export default EstablishmentDetail;

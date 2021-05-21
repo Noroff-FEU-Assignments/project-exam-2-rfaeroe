@@ -1,3 +1,24 @@
 .explorebergen{
     padding: 96px 0;
+    text-align: center;
+    
+
 }
+
+
+
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+
+    .explorebergen{
+        padding: 156px 0;
+        max-width: 1140px;
+        margin: auto;
+
+        .sectiontitle{
+            font-size: 32px;
+            margin: 1rem auto;
+        }
+    }
+
+  }

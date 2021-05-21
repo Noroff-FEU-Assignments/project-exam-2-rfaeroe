@@ -13,7 +13,6 @@ footer{
         padding: 2rem 0;
 
         .footer-nav{
-            flex-basis: 100%;
             text-align: center;
         }
 
@@ -23,19 +22,41 @@ footer{
 
         .footer-brand{
             text-align: center;
-            flex-basis: 100%;
             margin: 2rem auto;
         }
 
         .footer-contact{
             text-align: center;
-            flex-basis: 100%;
    
         }
 
         .footer-list-item{
-            flex-basis: 100%;
             padding: 12px 0;
         }
     }
 }
+
+
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    footer{
+        .footer-inner{
+     
+            .footer-nav{
+                text-align: left;
+            }
+
+            .footer-brand{
+                text-align: center;
+            }
+    
+            .footer-contact{
+                text-align: right;
+       
+            }
+
+        }
+    }
+    
+
+  }

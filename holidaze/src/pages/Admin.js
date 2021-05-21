@@ -1,144 +1,156 @@
-import {useContext, useState, useEffect} from 'react';
-import {useHistory, Link} from 'react-router-dom';
+import { useContext, useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import axios from 'axios';
-import {BASE_URL, ESTABLISHMENTS_PATH} from '../utils/constants';
-import EditEstablishment from '../components/EditEstablishment';
+import { BASE_URL, ESTABLISHMENTS_PATH } from '../utils/constants';
+
+import Modal from '../components/Modal';
+import ContactModal from '../components/ContactModal';
 
 
-
-
-const AdminPage = () => {
+const Admin = () => {
     const [auth] = useContext(AuthContext);
     const history = useHistory();
     const [establishments, setEstablishments] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [enquiries, setEnquiries] = useState([]);
-    const [render, setRender] = useState(null);
- 
+    const [render] = useState(null);
+    const [show, setShow] = useState(false);
+    const [showContact, setShowContact] = useState(false);
 
 
     useEffect(() => {
         const getEstablishments = async () => {
             try {
                 const response = await axios.get(`${BASE_URL}${ESTABLISHMENTS_PATH}`);
-                console.log(response);
                 setEstablishments(response.data);
-            } catch(error) {
+            } catch (error) {
                 console.log(error);
             }
         };
         getEstablishments();
-    }, [render]);
+    }, []);
 
     useEffect(() => {
         const getContacts = async () => {
             try {
                 const response = await axios.get(`${BASE_URL}/contacts`);
-                console.log(response);
                 setContacts(response.data);
-            } catch(error) {
+            } catch (error) {
                 console.log(error);
             }
         };
         getContacts();
-    }, [render]);
+    }, []);
 
     useEffect(() => {
         const getEnquiries = async () => {
             try {
                 const response = await axios.get(`${BASE_URL}/enquiries`);
-                console.log(response);
                 setEnquiries(response.data);
-            } catch(error) {
+            } catch (error) {
                 console.log(error);
             }
         };
         getEnquiries();
-    }, [render]);
+    }, []);
 
-
-    if(!auth) {
+    if (!auth) {
         history.push('/login');
     }
 
-    console.log(establishments);
-    console.log(contacts);
-    return (   
+    return (
         <div className={"container"}>
             <h1 className={"pageheading"}>Admin page</h1>
 
             <div className={"establishment-section"}>
                 <h2 className={"section-title"}>Enquiries</h2>
                 {enquiries.map((enquiry) => {
-                
+
                     return (
                         <div className={"establishment-item row"} key={enquiry.id}>
-                            <Link className={"establishment-wrapper"} to={`/establishments/${enquiry.id}`}>
-                                <div className={"establishment-left col-m-6"}>
-                                    <p className={"establishment-name"}>{enquiry.date_from}</p>
-                                   
-
-                                </div>
-                                <div className={"establishment-right col-m-6"}>
-                                    <p className={"establishment-name"}>{enquiry.date_to}</p>
-                                    <button className={"button establishment-button"} onClick={() => EditEstablishment(enquiry.id)}>
-                                        View
+                            <div className={"establishment-left col-m-6"}>
+                                <p className={"establishment-name"}>{enquiry.date_from}</p>
+                            </div>
+                            <div className={"establishment-right col-m-6"}>
+                                <p className={"establishment-name"}>{enquiry.date_to}</p>
+                                <button key={enquiry.id} onClick={() => setShow(true)} className={"button establishment-button"} >
+                                    View
                                     </button>
-                                </div>
-                            </Link>
+                            </div>
+                            <Modal
+                                id={enquiry.id}
+                                name={enquiry.name}
+                                fromDate={enquiry.date_from}
+                                toDate={enquiry.date_to}
+                                adults={enquiry.adults}
+                                children={enquiry.children}
+                                onClose={() => setShow(false)} show={show}
+                            />
                         </div>
-                    )
+                    );
                 })}
             </div>
 
             <div className={"establishment-section"}>
-                <h2 className={"section-title"}>contacts</h2>
+                <h2 className={"section-title"}>Contacts</h2>
                 {contacts.map((contact) => {
-                    console.log(contact)
+                    console.log(contact);
                     return (
                         <div className={"establishment-item row"} key={contact.id}>
-                            <Link className={"establishment-wrapper"} to={`/establishments/${contact.id}`}>
-                                <div className={"establishment-left col-m-6"}>
-                                    <p className={"establishment-name"}>{contact.sent_by_name}</p>
-                                    <p className={"establishment-name"}>{contact.subject}</p>
+                            <div className={"establishment-left col-m-6"}>
+                                <p className={"establishment-name"}>{contact.sent_by_name}</p>
+                                Subject:
+                                <p className={"establishment-name"}>{contact.subject}</p>
+                            </div>
+                            <div className={"establishment-right col-m-6"}>
 
-                                </div>
-                                <div className={"establishment-right col-m-6"}>
-                                    
-                                    <button className={"button establishment-button"} onClick={() => EditEstablishment(contact.id)}>
-                                        View
-                                    </button>
-                                </div>
-                            </Link>
+                                <button key={contact.id} onClick={() => setShowContact(true)} className={"button establishment-button"} >
+                                    View
+                            </button>
+                            </div>
+                            <ContactModal
+
+                                id={contact.id}
+                                fromName={contact.sent_by_name}
+                                email={contact.sent_by_mail}
+                                subject={contact.subject}
+                                message={contact.message}
+                                onClose={() => setShowContact(false)} show={showContact}
+                            />
                         </div>
-                    )
+                    );
                 })}
             </div>
 
             <div className={"establishment-section"}>
                 <h2 className={"section-title"}>Establishments</h2>
+                <Link className={"button button--add"} to='/add'>New establishment</Link>
                 {establishments.map((est) => {
                     return (
                         <div className={"establishment-item row"} key={est.id}>
-                            <Link className={"establishment-wrapper"} to={`/establishments/${est.id}`}>
+                            <div className={"establishment-wrapper"}>
                                 <div className={"establishment-left col-m-6"}>
-                                    <img className={"establishment-image"} src={est.establishment_image} alt={est.establishment_name} />
-                                    <p className={"establishment-name"}>{est.establishment_name}</p>
+                                    <Link to={`/est/${est.id}`}>
+                                        <img className={"establishment-image"} src={est.establishment_image} alt={est.establishment_name} />
+                                    </Link>
+                                    <Link to={`/est/${est.id}`}>
+                                        <p className={"establishment-name"}>{est.establishment_name}</p>
+                                    </Link>
                                 </div>
                                 <div className={"establishment-right col-m-6"}>
-                                    <button className={"button establishment-button"} onClick={() => EditEstablishment(est.id)}>
+                                    <Link to={`/edit/${est.id}`} className={"button establishment-button"} >
                                         Edit
-                                    </button>
+                                    </Link>
                                 </div>
-                            </Link>
+                            </div>
                         </div>
-                    )
+                    );
                 })}
             </div>
         </div>
     );
 };
 
-export default AdminPage;
+export default Admin;
 

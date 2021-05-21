@@ -13,33 +13,73 @@ fieldset{
 }
 
 .form-wrapper{
-    max-width: 558px;
-    padding: 1rem;
+    max-width: 940px;
     margin: 0 auto;
-
+    background: #003BA1;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.form {
-    order: 2;
+.form-enquiry{
     background: #003BA1;
-    padding: 1.5rem;
-    width: 100%;
-    .form-group{
-        margin: 1rem auto;
+}
 
-        input, select, textarea{
-            padding: 0.75rem;
-            border-radius: 8px;
-            border: 0;
+.form {
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 380px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%);
+    order: 2;
+
+    fieldset{
+        border: 0;
+        padding: 0;
+    }
+
+    .form-group{
+        margin-top: 1rem;
+
+        input, textarea{
+            display: block;
+            padding: 0.5rem 0.75rem;
             width: 100%;
+            font-size: 1rem;
+            line-height: 1.25;
+            color: #55595c;
+            background-color: #DFE5F2;
+            background-image: none;
+            background-clip: padding-box;
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 1px solid #eee;
+            border-left: 0;
+            border-radius: 3px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+
+            &:focus {
+                outline: 0;
+                border-bottom-color: #ffab00;
+              }
         }
 
         textarea{
-            height: 80px;
+            resize: vertical;
         }
+
+        label{
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            touch-action: manipulation;
+        }
+
 
         p{
             color: red;
@@ -47,6 +87,11 @@ fieldset{
             font-size: 14px;
         }
     }
+
+}
+
+p.success{
+    color: #fff;
 }
 
 .form-right{
@@ -54,15 +99,17 @@ fieldset{
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: #003BA1;
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 380px;
+    border-radius: 3px;
     width: 100%;
 
     .contact-list{
-        padding: 1.5rem;
-
         .contact-list-item{
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+            margin-top: 1rem;
 
             svg{
                 font-size: 40px;
