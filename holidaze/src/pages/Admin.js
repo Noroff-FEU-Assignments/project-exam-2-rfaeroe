@@ -4,8 +4,6 @@ import AuthContext from '../context/AuthContext';
 import axios from 'axios';
 import { BASE_URL, ESTABLISHMENTS_PATH } from '../utils/constants';
 
-import Modal from '../components/Modal';
-import ContactModal from '../components/ContactModal';
 
 
 const Admin = () => {
@@ -14,11 +12,7 @@ const Admin = () => {
     const [establishments, setEstablishments] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [enquiries, setEnquiries] = useState([]);
-    const [render] = useState(null);
-    const [show, setShow] = useState(false);
-    const [showContact, setShowContact] = useState(false);
-
-
+  
     useEffect(() => {
         const getEstablishments = async () => {
             try {
@@ -62,11 +56,9 @@ const Admin = () => {
     return (
         <div className={"container"}>
             <h1 className={"pageheading"}>Admin page</h1>
-
             <div className={"establishment-section"}>
                 <h2 className={"section-title"}>Enquiries</h2>
                 {enquiries.map((enquiry) => {
-
                     return (
                         <div className={"establishment-item row"} key={enquiry.id}>
                             <div className={"establishment-left col-m-6"}>
@@ -74,28 +66,17 @@ const Admin = () => {
                             </div>
                             <div className={"establishment-right col-m-6"}>
                                 <p className={"establishment-name"}>{enquiry.date_to}</p>
-                                <button key={enquiry.id} onClick={() => setShow(true)} className={"button establishment-button"} >
+                                <Link to={`/enquiries/${enquiry.id}`}  className={"button establishment-button"} >
                                     View
-                                    </button>
+                                    </Link>
                             </div>
-                            <Modal
-                                id={enquiry.id}
-                                name={enquiry.name}
-                                fromDate={enquiry.date_from}
-                                toDate={enquiry.date_to}
-                                adults={enquiry.adults}
-                                children={enquiry.children}
-                                onClose={() => setShow(false)} show={show}
-                            />
                         </div>
                     );
                 })}
             </div>
-
             <div className={"establishment-section"}>
                 <h2 className={"section-title"}>Contacts</h2>
                 {contacts.map((contact) => {
-                    console.log(contact);
                     return (
                         <div className={"establishment-item row"} key={contact.id}>
                             <div className={"establishment-left col-m-6"}>
@@ -105,24 +86,14 @@ const Admin = () => {
                             </div>
                             <div className={"establishment-right col-m-6"}>
 
-                                <button key={contact.id} onClick={() => setShowContact(true)} className={"button establishment-button"} >
+                            <Link to={`/contacts/${contact.id}`} className={"button establishment-button"} >
                                     View
-                            </button>
-                            </div>
-                            <ContactModal
-
-                                id={contact.id}
-                                fromName={contact.sent_by_name}
-                                email={contact.sent_by_mail}
-                                subject={contact.subject}
-                                message={contact.message}
-                                onClose={() => setShowContact(false)} show={showContact}
-                            />
+                            </Link>
+                            </div>         
                         </div>
                     );
                 })}
             </div>
-
             <div className={"establishment-section"}>
                 <h2 className={"section-title"}>Establishments</h2>
                 <Link className={"button button--add"} to='/add'>New establishment</Link>

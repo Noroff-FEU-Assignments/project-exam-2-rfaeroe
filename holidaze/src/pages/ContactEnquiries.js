@@ -3,11 +3,10 @@ import { BASE_URL, ESTABLISHMENTS_PATH } from "../utils/constants";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import SingleItem from '../components/SingleItem';
-import EnquiryForm from "../components/EnquiryForm";
-import BookingModal from "../components/BookingModal";
 
-const EstablishmentDetail = () => {
-    const [establishment, setEstablishments] = useState([]);
+
+const ContactEnquiries = () => {
+    const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -16,13 +15,14 @@ const EstablishmentDetail = () => {
     if (!id) {
         history.push("/");
     }
-    const url = BASE_URL + ESTABLISHMENTS_PATH + "/" + id;
+
+    const url = BASE_URL + "/contacts" + "/" + id;
     useEffect(() => {
-        const fetchEstablishments = async () => {
+        const fetchContacts = async () => {
             try {
                 const response = await axios.get(url);
                 if (response.status === 200) {
-                    setEstablishments(response.data);
+                    setContacts(response.data);
                 } else {
                     setError("An error occured");
                 }
@@ -33,7 +33,7 @@ const EstablishmentDetail = () => {
             }
         };
 
-        fetchEstablishments();
+        fetchContacts();
     }, [url]);
 
     if (loading) {
@@ -43,21 +43,32 @@ const EstablishmentDetail = () => {
         return <div>ERROR: An error occured</div>;
     }
 
+    console.log(contacts)
+
     return (
         <div className={"establishments sectionwrapper row"}>
             <div className={"establishments-card col-d-12"}>
-                <SingleItem
-                    key={establishment.id}
-                    image={establishment.establishment_image}
-                    name={establishment.establishment_name}
-                    price={establishment.establishment_price}
-                    description={establishment.establishment_description}
-                    location={establishment.establishment_location}
-                    facilities={establishment.establishment_facilities}
-                />
-                
+            <div className={"card"}>
+            <div className={"card-content"}>
+                <div className={"card-header"}>
+                    <h2 className={"card-title"}>Contact Enquiry</h2>
+                </div>
+                <div className={"card-body"}>
+                    <ul>
+                        <li>From name:<span>{contacts.sent_by_name}</span></li>
+                        <li>From email: <span>{contacts.sent_by_mail}</span></li>
+                        <li>Subject: <span>{contacts.subject}</span></li>
+                        <li>Message: <span>{contacts.message}</span></li>
+                    </ul>
+                </div>
+                <div className={"card-footer"}>
+                    <a href={`mailto:${contacts.email}`}>Reply</a>
+                </div>
+
+            </div>
+        </div>
             </div>
         </div>
     );
 };
-export default EstablishmentDetail;
+export default ContactEnquiries;

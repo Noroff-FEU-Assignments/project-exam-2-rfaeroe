@@ -13,6 +13,8 @@ import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 import AddEstablishment from './pages/AddEstablishment';
 import EditEstablishment from './pages/EditEstablishment';
+import ContactEnquiries from './pages/ContactEnquiries';
+import BookingEnquiries from './pages/BookingEnquiries';
 
 const App = () => {
   return (
@@ -27,6 +29,8 @@ const App = () => {
           <Route path='/admin' component={Admin} />
           <Route path='/add' component={AddEstablishment} />
           <Route path='/edit/:id' component={EditEstablishment} />
+          <Route path='/contacts/:id' component={ContactEnquiries} />
+          <Route path='/enquiries/:id' component={BookingEnquiries} />
           <Route path='/login' component={Login} />
         </Switch>
         <Footer />

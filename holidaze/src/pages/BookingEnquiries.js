@@ -3,11 +3,10 @@ import { BASE_URL, ESTABLISHMENTS_PATH } from "../utils/constants";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import SingleItem from '../components/SingleItem';
-import EnquiryForm from "../components/EnquiryForm";
-import BookingModal from "../components/BookingModal";
 
-const EstablishmentDetail = () => {
-    const [establishment, setEstablishments] = useState([]);
+
+const BookingEnquiries = () => {
+    const [booking, setBookingEnquiries] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -16,13 +15,14 @@ const EstablishmentDetail = () => {
     if (!id) {
         history.push("/");
     }
-    const url = BASE_URL + ESTABLISHMENTS_PATH + "/" + id;
+
+    const url = BASE_URL + "/enquiries" + "/" + id;
     useEffect(() => {
-        const fetchEstablishments = async () => {
+        const fetchEnquiries = async () => {
             try {
                 const response = await axios.get(url);
                 if (response.status === 200) {
-                    setEstablishments(response.data);
+                    setBookingEnquiries(response.data);
                 } else {
                     setError("An error occured");
                 }
@@ -33,8 +33,10 @@ const EstablishmentDetail = () => {
             }
         };
 
-        fetchEstablishments();
+        fetchEnquiries();
     }, [url]);
+
+console.log(booking.id)
 
     if (loading) {
         return <h1 className="loading">Loading so much</h1>;
@@ -46,18 +48,25 @@ const EstablishmentDetail = () => {
     return (
         <div className={"establishments sectionwrapper row"}>
             <div className={"establishments-card col-d-12"}>
-                <SingleItem
-                    key={establishment.id}
-                    image={establishment.establishment_image}
-                    name={establishment.establishment_name}
-                    price={establishment.establishment_price}
-                    description={establishment.establishment_description}
-                    location={establishment.establishment_location}
-                    facilities={establishment.establishment_facilities}
-                />
-                
+            <div className={"card"}>
+            <div className={"card-content"}>
+                <div className={"card-header"}>
+                    <h2 className={"card-title"}>Booking enquiry</h2>
+                </div>
+                <div className={"card-body"}>
+                    <ul>
+                    <li>Establishment:<span>{booking.name}</span></li>
+                        <li>From: <span>{booking.date_from}</span></li>
+                        <li>To: <span>{booking.date_to}</span></li>
+                        <li>Adults: <span>{booking.adults}</span></li>
+                        <li>Children: <span>{booking.children}</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
             </div>
         </div>
     );
 };
-export default EstablishmentDetail;
+export default BookingEnquiries;

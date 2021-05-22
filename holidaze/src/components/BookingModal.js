@@ -1,7 +1,6 @@
 import EnquiryForm from "./EnquiryForm";
 
 const Modal = props => {
-    const { fromDate, toDate, children, adults, name } = props;
 
     if (!props.show) {
         return null;

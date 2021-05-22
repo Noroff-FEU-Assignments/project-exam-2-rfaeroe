@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { enquiriesSchema } from '../utils/schemas';
 import useAxios from '../utils/useAxios';
 import { BASE_URL, ESTABLISHMENTS_PATH } from '../utils/constants';
+import {useFormik} from 'formik';
+import * as yup from 'yup'; 
 
 
 const EnquiryForm = () => {
@@ -15,25 +17,39 @@ const EnquiryForm = () => {
 
     const [submitting, setSubmitting] = useState(false);
     const [updateError, setUpdateError] = useState(null);
-    const [success, setSuccess] = useState(null);
-    const { register, handleSubmit, errors } = useForm({
-        resolver: yupResolver(enquiriesSchema),
-    });
 
-    const onSubmit = async (data) => {
-        setSubmitting(true);
-        setUpdateError(null);
-        try {
-            const response = await http.post(`${BASE_URL}/enquiries`, data);
-            setEnquiry(response.data);
-            setSuccess(true);
-        } catch (error) {
-            console.log('error', error);
-            setUpdateError(error.toString());
-        } finally {
-            setSubmitting(false);
+    const [success, setSuccess] = useState(null);
+
+    const { handleChange, handleSubmit, values, touched, errors, handleBlur } = useFormik({
+        initialValues: {
+            name: "",
+            date_to: "",
+            date_from: "",
+            adults: "",
+            children: "",
+        },
+        enquirySchema: yup.object().shape({
+            name: yup.string().required("Please choose establishment"),
+            date_to: yup.date().required("Please choose end date"),
+            date_from: yup.date().required("Please choose arrival date"),
+            adults: yup.number().required("Please select subject"),
+            children: yup.number().required("Please enter your message")
+        }),
+        onSubmit: async (data) => {
+            setSubmitting(true);
+            setUpdateError(null);
+            try {
+                const response = await http.post(`${BASE_URL}/enquiries`, data);
+                setEnquiry(response.data);
+                setSuccess(true);
+            } catch (error) {
+                console.log('error', error);
+                setUpdateError(error.toString());
+            } finally {
+                setSubmitting(false);
+            }
         }
-    };
+    });
 
     useEffect(() => {
         const getEstablishment = async () => {
@@ -56,15 +72,16 @@ const EnquiryForm = () => {
         <div className={""}>
             <h1 className={"pageheading"}>Book {establishment.establishment_name}</h1>
 
-            <form className='form' onSubmit={handleSubmit(onSubmit)}>
+            <form className='form' onSubmit={handleSubmit}>
                 {updateError && <p>{updateError}</p>}
                 <fieldset className='row' disabled={submitting}>
                     <div className='form-group col-d-12 col-m-12'>
                         <input
                             name='name'
                             placeholder='Name'
-                            ref={register}
+                            onChange={handleChange}
                             defaultValue={establishment.establishment_name}
+                            
                         />
                         {errors.name && <p>{errors.name.message}</p>}
                     </div>
@@ -73,7 +90,8 @@ const EnquiryForm = () => {
                         <input
                             name='date_from'
                             placeholder='Date from'
-                            ref={register}
+                            value={values.date_from}
+                            onChange={handleChange}
                             type='date'
                         />
                         {errors.date_from && <p>{errors.date_from.message}</p>}
@@ -82,7 +100,8 @@ const EnquiryForm = () => {
                         <input
                             name='date_to'
                             placeholder='Date to'
-                            ref={register}
+                            value={values.date_to}
+                            onChange={handleChange}
                             type='date'
                         />
                         {errors.date_to && <p>{errors.date_to.message}</p>}
@@ -91,7 +110,8 @@ const EnquiryForm = () => {
                         <input
                             name='children'
                             placeholder='Children'
-                            ref={register}
+                            value={values.children}
+                            onChange={handleChange}
                             type='number'
                         />
                         {errors.children && <p>{errors.children.message}</p>}
@@ -100,7 +120,8 @@ const EnquiryForm = () => {
                         <input
                             name='adults'
                             placeholder='Adults'
-                            ref={register}
+                            onChange={handleChange}
+                            value={values.adults}
                             type='number'
                         />
                         {errors.adults && <p>{errors.adults.message}</p>}
