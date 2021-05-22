@@ -38,31 +38,31 @@ const ContactForm = () => {
     };
 
     return (
-        <div className={"sectionwrapper"}>
+        <div className={"wrapper sectionwrapper"}>
             <div className={"form-wrapper"}>
                 <form className='form col-d-6 col-m-12' onSubmit={handleSubmit(onSubmit)}>
                     {postError && <p>{postError}</p>}
                     <fieldset disabled={submitting}>
                         <div className='form-group'>
-                            <label for="sent_by_name">Name:</label>
+                            <label htmlFor="sent_by_name">Name:</label>
                             <input name="sent_by_name" ref={register} type='text' />
                             {errors.sent_by_name && <p>{errors.sent_by_name.message}</p>}
                         </div>
 
                         <div className='form-group'>
-                            <label for="sent_by_mail">Email:</label>
+                            <label htmlFor="sent_by_mail">Email:</label>
                             <input name="sent_by_mail" ref={register} type='text' />
                             {errors.sent_by_mail && <p>{errors.sent_by_mail.message}</p>}
                         </div>
 
                         <div className='form-group'>
-                            <label for="subject">Subject:</label>
+                            <label htmlFor="subject">Subject:</label>
                             <input name="subject" ref={register} type='text' />
                             {errors.subject && <p>{errors.subject.message}</p>}
                         </div>
 
                         <div className='form-group'>
-                            <label for="message">Message:</label>
+                            <label htmlFor="message">Message:</label>
                             <textarea name="message" ref={register} type='text' />
                             {errors.message && <p>{errors.message.message}</p>}
                         </div>
