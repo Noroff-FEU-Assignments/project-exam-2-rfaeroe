@@ -1,4 +1,6 @@
 import EnquiryForm from "./EnquiryForm";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Modal = props => {
 
@@ -10,15 +12,11 @@ const Modal = props => {
         <div className={"modal"}>
             <div className={"modal-content"}>
                 <div className={"modal-header"}>
-                    <h2 className={"modal-title"}>Booking enquiry</h2>
+                    <button className="modal-close" onClick={props.onClose}><FontAwesomeIcon icon={faTimes} /></button>
                 </div>
                 <div className={"modal-body"}>
                     <EnquiryForm />
                 </div>
-                <div className={"modal-footer"}>
-                    <button onClick={props.onClose}>Close</button>
-                </div>
-
             </div>
         </div>
     );
