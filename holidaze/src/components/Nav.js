@@ -3,82 +3,78 @@ import { Link, useHistory } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 function Nav() {
     const [auth, setAuth] = useContext(AuthContext);
-    const [click, setClick] = useState(false);
     const history = useHistory();
+
+    const [isMobile, setIsMobile] = useState(false);
 
     function logout() {
         setAuth(null);
         history.push('/');
     }
 
-    const handleClick = () => setClick(!click);
     return (
-        <nav className="navbar">
-            <div className="nav-container">
+        <div className="navbar-wrapper">
+            <nav className="navbar">
                 <Link to='/' className={"nav-logo"}>
                     HOLIDAZE
                 </Link>
-            </div>
-            <ul className={click ? "nav-menu active" : "nav-menu"}>
-                <li className="nav-item">
-                    <Link
-                        to='/'
-                        className="nav-links"
-                        onClick={handleClick}
-                    >
-                        Home
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link
-                        to='/establishments'
-                        className="nav-links"
-                        onClick={handleClick}
-                    >
-                        Establishments
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link
-                        to='/contact'
-                        className="nav-links"
-                        onClick={handleClick}
-                    >
-                        Contact
-                    </Link>
-                </li>
-                {auth ? (
+                <ul className={isMobile ? "nav-menu-mobile" : "nav-menu"}
+                    onClick={() => setIsMobile(false)}>
                     <li className="nav-item">
                         <Link
-                            to='/admin'
+                            to='/'
                             className="nav-links"
-                            onClick={handleClick}
                         >
-                            Admin
+                            Home
+                    </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link
+                            to='/establishments'
+                            className="nav-links"
+                        >
+                            Establishments
+                    </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link
+                            to='/contact'
+                            className="nav-links"
+                        >
+                            Contact
+                    </Link>
+                    </li>
+                    {auth ? (
+                        <li className="nav-item nav-item--admin">
+                            <Link
+                                to='/admin'
+                                className="nav-links"
+                            >
+                                Admin
                         </Link> |{' '}
-                        <button onClick={logout}>Log out</button>
-                    </li>
-                ) : (
-                    <li className="nav-item">
-                        <Link
-                            to='/login'
-                            className="nav-links"
-                            onClick={handleClick}
-                        >
-                            Login
+                            <button className="logout-button" onClick={logout}>Log out</button>
+                        </li>
+                    ) : (
+                        <li className="nav-item">
+                            <Link
+                                to='/login'
+                                className="nav-links"
+                            >
+                                Login
                         </Link>
-                    </li>
-                )}
-            </ul>
-            <div className="nav-icon" onClick={handleClick}>
-                <FontAwesomeIcon icon={faTimes} />
-                <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
-            </div>
-        </nav>
+                        </li>
+                    )}
+                </ul>
+                <button className="mobile-menu-icon"
+                    onClick={() => setIsMobile(!isMobile)}>
+                    {isMobile ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
+                </button>
+            </nav>
+        </div>
     );
 }
 

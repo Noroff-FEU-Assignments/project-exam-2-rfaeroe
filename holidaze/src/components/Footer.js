@@ -20,7 +20,7 @@ const Footer = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="footer-brand col dcol-d-3">
+                <div className="footer-brand col col-d-3">
                     <h4>HOLIDAZE</h4>
                 </div>
                 <div className="footer-contact col col-d-3">

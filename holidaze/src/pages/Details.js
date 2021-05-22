@@ -3,8 +3,6 @@ import { BASE_URL, ESTABLISHMENTS_PATH } from "../utils/constants";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import SingleItem from '../components/SingleItem';
-import EnquiryForm from "../components/EnquiryForm";
-import BookingModal from "../components/BookingModal";
 
 const EstablishmentDetail = () => {
     const [establishment, setEstablishments] = useState([]);
@@ -44,8 +42,8 @@ const EstablishmentDetail = () => {
     }
 
     return (
-        <div className={"establishments sectionwrapper row"}>
-            <div className={"establishments-card col-d-12"}>
+        <div className={"single-establishment sectionwrapper row"}>
+            <div className={"establishments-card establishments-card--single col-d-12"}>
                 <SingleItem
                     key={establishment.id}
                     image={establishment.establishment_image}
@@ -55,7 +53,7 @@ const EstablishmentDetail = () => {
                     location={establishment.establishment_location}
                     facilities={establishment.establishment_facilities}
                 />
-                
+
             </div>
         </div>
     );

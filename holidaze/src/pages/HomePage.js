@@ -72,8 +72,8 @@ const HomePage = () => {
                     </Container>
                 </div>
             </div>
-            <div className="explorebergen">
-                <h2 className={"pageheading"}>What to do in <span>Bergen</span></h2>
+            <div className="wrapper sectionwrapper">
+                <h2 className={"pageheading pageheading--sub"}>What to do in <span>Bergen</span></h2>
                 <div className="row">
                     <div className="card col col-m-12 col-d-3">
                         <div className="card-inner">
