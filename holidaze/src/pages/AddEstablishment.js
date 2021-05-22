@@ -1,11 +1,15 @@
 import useAxios from '../utils/useAxios';
 import { useState } from 'react';
-import Item from '../components/SingleItem';
 import { ESTABLISHMENTS_PATH } from '../utils/constants';
+import { Link } from "react-router-dom";
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { establishmentSchema } from '../utils/schemas';
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const AddEstablishment = () => {
     const [establishment, setEstablishment] = useState(null);
@@ -39,9 +43,10 @@ const AddEstablishment = () => {
 
     return (
 
-        <div className={"container"}>
-            <h1 className={"pageheading"}>Add Product</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={"container sectionwrapper"}>
+            <Link className="goback" to="/admin"><FontAwesomeIcon icon={faArrowLeft} /> Go back</Link>
+            <h1 className={"pageheading"}>Add <span>Establishment</span></h1>
+            <form className="form" style={{ marginTop: "48px" }} onSubmit={handleSubmit(onSubmit)}>
                 {postError && <p>{postError}</p>}
                 <fieldset disabled={submitting}>
                     <div className={"form-group"}>
@@ -49,9 +54,8 @@ const AddEstablishment = () => {
                             name='establishment_name'
                             placeholder='Title'
                             ref={register}
-
                         />
-                        {errors.establishment_name && <p>{errors.establishment_name.message}</p>}
+                        {errors.establishment_name && <p className="error">{errors.establishment_name.message}</p>}
                     </div>
 
                     <div className={"form-group"}>
@@ -60,8 +64,9 @@ const AddEstablishment = () => {
                             placeholder='Price'
                             ref={register}
                             type='number'
+                            min="1"
                         />
-                        {errors.establishment_price && <p>{errors.establishment_price.message}</p>}
+                        {errors.establishment_price && <p className="error">{errors.establishment_price.message}</p>}
                     </div>
                     <div className={"form-group"}>
                         <textarea
@@ -70,7 +75,7 @@ const AddEstablishment = () => {
                             ref={register}
                             type='text'
                         />
-                        {errors.establishment_description && <p>{errors.establishment_description.message}</p>}
+                        {errors.establishment_description && <p className="error">{errors.establishment_description.message}</p>}
                     </div>
                     <div className={"form-group"}>
                         <input
@@ -79,21 +84,19 @@ const AddEstablishment = () => {
                             ref={register}
                             type='text'
                         />
-                        {errors.establishment_image && <p>{errors.establishment_image.message}</p>}
+                        {errors.establishment_image && <p className="error">{errors.establishment_image.message}</p>}
+                    </div>
+                    <div className="form-group">
+                        <button className="btn" style={{ width: "100%" }} type='submit'>{submitting ? 'Adding...' : 'Add'}</button>
                     </div>
 
-                    <button type='submit'>{submitting ? 'Updating ...' : 'Update'}</button>
                 </fieldset>
+                <div className="form-group">
+                    {success ? <p className="success">New establishment listing of {establishment.title} was created</p> : null}
+                </div>
             </form>
-            <div className={"card"}>
-                {success ? <p>Listing of {establishment.title} was updated</p> : null}
-                <Item {...establishment} />
-            </div>
-
-
         </div>
     );
-
 };
 
 export default AddEstablishment;

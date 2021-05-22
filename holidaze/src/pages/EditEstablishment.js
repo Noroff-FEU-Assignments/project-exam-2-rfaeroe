@@ -1,8 +1,12 @@
 import { useParams } from 'react-router-dom';
 import useAxios from '../utils/useAxios';
 import { useState, useEffect } from 'react';
-import SingleItem from '../components/SingleItem';
 import { ESTABLISHMENTS_PATH } from '../utils/constants';
+import { Link } from "react-router-dom";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 
 import { establishmentSchema } from '../utils/schemas';
 import { useForm } from 'react-hook-form';
@@ -57,12 +61,13 @@ const EditEstablishment = () => {
     }
 
     return (
-        <>
-            <h1 className={"pageheading"}>Edit Product</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="container sectionwrapper">
+            <Link className="goback" to="/admin"><FontAwesomeIcon icon={faArrowLeft} /> Go back</Link>
+            <h1 className={"pageheading"}>Add <span>Establishment</span></h1>
+            <form className="form" style={{ marginTop: "48px" }} onSubmit={handleSubmit(onSubmit)}>
                 {updateError && <p>{updateError}</p>}
                 <fieldset disabled={submitting}>
-                    <div>
+                    <div className={"form-group"}>
                         <input
                             name='establishment_name'
                             placeholder='Name'
@@ -72,7 +77,7 @@ const EditEstablishment = () => {
                         {errors.establishment_name && <p>{errors.establishment_name.message}</p>}
                     </div>
 
-                    <div>
+                    <div className={"form-group"}>
                         <input
                             name='establishment_price'
                             placeholder='Price'
@@ -82,7 +87,7 @@ const EditEstablishment = () => {
                         />
                         {errors.establishment_price && <p>{errors.establishment_price.message}</p>}
                     </div>
-                    <div>
+                    <div className={"form-group"}>
                         <textarea
                             name='establishment_description'
                             placeholder='Description'
@@ -92,7 +97,7 @@ const EditEstablishment = () => {
                         />
                         {errors.establishment_description && <p>{errors.establishment_description.message}</p>}
                     </div>
-                    <div>
+                    <div className={"form-group"}>
                         <input
                             name='establishment_image'
                             placeholder='Image URL'
@@ -103,13 +108,13 @@ const EditEstablishment = () => {
                         {errors.establishment_image && <p>{errors.establishment_image.message}</p>}
                     </div>
 
-                    <button type='submit'>{submitting ? 'Updating ...' : 'Update'}</button>
+                    <div className="form-group">
+                        <button className="btn" style={{ width: "100%" }} type='submit'>{submitting ? 'Updating...' : 'Update'}</button>
+                    </div>
                 </fieldset>
             </form>
             {success ? <p>Listing of {establishment.establishment_name} was updated</p> : null}
-            <SingleItem {...establishment} />
-
-        </>
+        </div>
     );
 
 };
