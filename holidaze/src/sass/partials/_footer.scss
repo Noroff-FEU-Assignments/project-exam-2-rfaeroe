@@ -1,9 +1,10 @@
 footer{
- 
+    background: #012C6D;
  
 
     .footer-inner{
-        background: #003BA1;
+        max-width: 1140px;
+        margin: auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -14,6 +15,8 @@ footer{
 
         .footer-nav{
             text-align: center;
+            margin: 1rem 0;
+            width: 100%;
         }
 
         .footer-list{
@@ -23,15 +26,22 @@ footer{
         .footer-brand{
             text-align: center;
             margin: 2rem auto;
+            width: 100%;
+            color: #ffab00;
         }
 
         .footer-contact{
             text-align: center;
-   
+            margin: 1rem 0;
+            width: 100%;
         }
 
         .footer-list-item{
-            padding: 12px 0;
+            margin: 1rem 0;
+
+            a:hover{
+                color: #ffab00;
+            }
         }
     }
 }

@@ -1,21 +1,22 @@
 .card{
-    margin: 1rem auto;
+    margin: auto;
 }
 
 
 .establishments-card{
-margin-top: 1rem;
-margin-bottom: 1rem;
+    margin: 1rem 0;
  padding-left: 1rem;
  padding-right: 1rem;
+
+ &--single{
+     margin: auto;
+ }
 
  .establishments-card-inner{
     background: #fff;
     display: flex;
     flex-wrap: wrap;
     border-radius: 3px;
-    box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%);
-
  }
  
 
@@ -30,7 +31,7 @@ margin-bottom: 1rem;
      display: flex;
      flex-wrap: wrap;
      align-items: center;
-     padding: 1.5rem;
+     padding: 2rem 1rem;
 
      .card-title{
          font-size: 20px;
@@ -46,11 +47,7 @@ margin-bottom: 1rem;
          text-transform: capitalize;
          font-size: 16px;
          width: 100%;
-         display: inline-block;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            text-transform: uppercase;
-            touch-action: manipulation;
+         
      }
 
      .card-desc{
@@ -63,6 +60,8 @@ margin-bottom: 1rem;
 
      .card-readmore{
          margin-top: 1rem;
+         color: blue;
+         font-weight: bold;
      }
 
      .card-button{
@@ -99,6 +98,74 @@ margin-bottom: 1rem;
     }
 }
 
+.enquiry{
+    padding: 46px 0;
+}
+
+.enquiry-wrapper{
+    margin: 1rem;
+}
+
+.card{
+    max-width: 500px;
+    margin: auto;
+    padding: 1rem;
+}
+
+.card-content{
+    max-width: 500px;
+    background-color: #fff;
+    margin: auto;
+}
+
+.card-header{
+    padding: 1rem;
+    
+}
+
+.card-title{
+    margin: 0;
+}
+
+.card-body{
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+
+    .contact-message{
+        display: flex;
+        flex-direction: column;
+
+        .no-margin{
+            margin-left: 0;
+            margin-top: 0.5rem;
+        }
+    }
+
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    li{
+        font-weight: bold;
+        padding: 0.5rem 0;
+
+        span{
+            font-weight: normal;
+            margin-left: 0.5rem;
+        }
+    }
+}
+
+.card-footer{
+    padding: 1rem 2rem;
+
+    .reply{
+        font-weight: bold;
+        color: blue;
+    }
+}
 
 
 @media only screen and (min-width: 768px) {
@@ -106,8 +173,30 @@ margin-bottom: 1rem;
 
     .establishments-card{
 
+        .card-inner-content{
+            padding: 1.5rem;
+
+            .card-title{
+                font-size: 20px;
+                flex-basis: 70%;
+            }
+
+            .card-price{
+                flex-basis: 30%;
+                margin-top: 0;
+                text-align: end;
+            }
+
+            .card-desc{
+                font-size: 15px;
+            }
+         }
     }
 
+    .enquiry{
+        padding: 143px 0;
+    
+    }
 
     .card-image{
         border-top-left-radius: 3px;
@@ -117,4 +206,17 @@ margin-bottom: 1rem;
        object-fit: cover;
     }
 
+    .card{
+        padding: 1rem;
+        max-width: 500px;
+    }
+    
+    .card-header{
+        padding: 2rem;
+    }
+     
+    .card-body{
+        padding: 2rem;
+    }
   }
+

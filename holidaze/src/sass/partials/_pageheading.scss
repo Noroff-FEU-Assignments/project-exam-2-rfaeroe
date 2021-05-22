@@ -3,13 +3,17 @@
     text-align: center;
     z-index: 899;
     margin: auto;
-    color: #003BA1;
+    color: #012C6D;
     font-size: 32px;
     padding: 0 1rem;
-    margin: 2rem auto;
+    margin: 1rem auto;
 
     span{
-        color: #FE981E;
+        color: #ffab00;
+    }
+
+    &--sub{
+        font-size: 24px;
     }
 }
 
@@ -18,7 +22,11 @@
     /* For desktop: */
 
     .pageheading{
-        font-size: 48px
+        font-size: 48px;
+
+        &--sub{
+            font-size: 36px;
+        }
     }
 
   }

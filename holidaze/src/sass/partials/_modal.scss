@@ -15,8 +15,20 @@
     background-color: #fff;
 }
 
-.modal-header, .modal-footer{
+.modal-header{
     padding: 10px;
+    text-align: end;
+}
+
+.modal-close{
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 18px;
+    color: #c4c4c4;
+
+    &:hover{
+        color: #000;
+    }
 }
 
 .modal-title{

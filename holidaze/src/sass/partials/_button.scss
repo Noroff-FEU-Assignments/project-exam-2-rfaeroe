@@ -1,15 +1,31 @@
 .button{
-    background: #FE981E;
+    background: #ffab00;
     border: none;
     border-radius: 24px;
     padding: 10px 16px;
     font-weight: bold;
     font-size: 14px;
+    width: 100%;
+    max-width: 120px;
+    margin-top: 1rem;
 
     &--add{
       margin-right: 1rem;
     }
 }
+
+.button-wrapper{
+  width: 100%;
+  text-align: end;
+
+  
+  .button-add{
+    margin-left: auto;
+    padding-right: 1rem;
+    font-weight: 600;
+  }
+}
+
 
 .contact-button{
     width: 117px;

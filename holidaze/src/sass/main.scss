@@ -15,6 +15,7 @@
 @import './partials/typehead';
 @import './partials/footer';
 @import './partials/modal';
+@import './partials/messages';
 
 *{
     box-sizing: border-box;
@@ -28,7 +29,10 @@ ul, li {
     list-style: none;
 }
 
-
+html{
+    height: 100%;
+    position: relative;
+}
 
 a{
     color: inherit;

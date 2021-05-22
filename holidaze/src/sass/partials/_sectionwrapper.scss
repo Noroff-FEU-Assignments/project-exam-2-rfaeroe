@@ -4,12 +4,23 @@
 }
 
 .establishment-section{
-    padding: 56px 0;
+    padding: 16px 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .section-title{
-    text-align: center;
     font-size: 18px;
     margin-left: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
     
 }
+
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .section-title{
+        font-size: 20px;
+    }
+
+  }
