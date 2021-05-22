@@ -15,6 +15,7 @@ export const contactSchema = yup.object().shape({
 
 export const enquiriesSchema = yup.object().shape({
     name: yup.string().required("Please choose establishment"),
+    establishment_name: yup.string().required("Please choose establishment"),
     date_to: yup.date().required("Please choose end date"),
     date_from: yup.date().required("Please choose arrival date"),
     adults: yup.number().required("Please select subject"),
