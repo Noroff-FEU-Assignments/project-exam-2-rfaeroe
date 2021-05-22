@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { BASE_URL, ESTABLISHMENTS_PATH } from "../utils/constants";
-import { useParams, useHistory } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+import { useParams, useHistory, Link } from "react-router-dom";
 import axios from "axios";
-import SingleItem from '../components/SingleItem';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const BookingEnquiries = () => {
     const [booking, setBookingEnquiries] = useState([]);
@@ -36,7 +37,7 @@ const BookingEnquiries = () => {
         fetchEnquiries();
     }, [url]);
 
-console.log(booking.id)
+    console.log(booking.id);
 
     if (loading) {
         return <h1 className="loading">Loading so much</h1>;
@@ -46,25 +47,25 @@ console.log(booking.id)
     }
 
     return (
-        <div className={"establishments sectionwrapper row"}>
+        <div className={"enquiry sectionwrapper row"}>
             <div className={"establishments-card col-d-12"}>
-            <div className={"card"}>
-            <div className={"card-content"}>
-                <div className={"card-header"}>
-                    <h2 className={"card-title"}>Booking enquiry</h2>
+                <Link className="goback" to="/admin"><FontAwesomeIcon icon={faArrowLeft} /> Go back</Link>
+                <div className={"card"}>
+                    <div className={"card-content"}>
+                        <div className={"card-header"}>
+                            <h2 className={"card-title"}>Booking enquiry</h2>
+                        </div>
+                        <div className={"card-body"}>
+                            <ul>
+                                <li className="col-m-12 col-d-12">Establishment:<span>{booking.name}</span></li>
+                                <li className="col-m-12 col-d-6">From: <span>{booking.date_from}</span></li>
+                                <li className="col-m-12 col-d-6">To: <span>{booking.date_to}</span></li>
+                                <li className="col-m-12 col-d-6">Adults: <span>{booking.adults}</span></li>
+                                <li className="col-m-12 col-d-6">Children: <span>{booking.children}</span></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div className={"card-body"}>
-                    <ul>
-                    <li>Establishment:<span>{booking.name}</span></li>
-                        <li>From: <span>{booking.date_from}</span></li>
-                        <li>To: <span>{booking.date_to}</span></li>
-                        <li>Adults: <span>{booking.adults}</span></li>
-                        <li>Children: <span>{booking.children}</span></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
             </div>
         </div>
     );
