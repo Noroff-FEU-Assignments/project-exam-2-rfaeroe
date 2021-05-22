@@ -28,7 +28,7 @@ const Establishments = () => {
             <div className={"establishments sectionwrapper row"}>
                 {establish.map((est) => {
                     return (
-                        <div className={"establishments-card col-d-6"} key={est.id}>
+                        <div className={"establishments-card col-m-12 col-sm-6 col-d-6"} key={est.id}>
                             <MultiItem
                                 id={est.id}
                                 image={est.establishment_image}
