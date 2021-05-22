@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {useState} from "react";
+import { useState } from "react";
 import BookingModal from "../components/BookingModal";
 
 const SingleItem = props => {
