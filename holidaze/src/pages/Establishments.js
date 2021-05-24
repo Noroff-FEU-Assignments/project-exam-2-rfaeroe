@@ -26,9 +26,6 @@ const Establishments = () => {
         getEstablishments();
     }, []);
 
-    console.log(establish);
-    console.log(loading);
-
     return (
         <div className={"container"}>
             <h1 className={"pageheading"}>Find accomodations in <span>Bergen</span></h1>
