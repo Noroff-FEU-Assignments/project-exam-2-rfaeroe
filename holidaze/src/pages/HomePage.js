@@ -60,10 +60,10 @@ const HomePage = () => {
                         <div className="typehead">
                             <input className="typehead-input" placeholder="Find your stay in Bergen" type="text" onChange={(handleFiltering)} onFocus={showTypeahead} tabIndex="0" />
                             <div className="typehead-dropdown">
-                                {establishments.map((shit) => {
+                                {establishments.map((est) => {
                                     return (
-                                        <div className="typehead-item" key={shit.id} style={{ backgroundColor: "white", display: display ? "none" : "block" }}>
-                                            <Link className="typehead-item-link" to={`details/${shit.id}`}>{shit.establishment_name}</Link>
+                                        <div className="typehead-item" key={est.id} style={{ backgroundColor: "white", display: display ? "none" : "block" }}>
+                                            <Link className="typehead-item-link" to={`est/${est.id}`}>{est.establishment_name}</Link>
                                         </div>
                                     );
                                 })}

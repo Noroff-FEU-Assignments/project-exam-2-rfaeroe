@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 const MultiItem = props => {
     const { id, name, description, price, image } = props;
 
@@ -10,7 +10,7 @@ const MultiItem = props => {
                 <h2 className={"card-title"}>{name}</h2>
                 <p className={"card-price"}>{price}$ /Night</p>
                 <p className={"card-desc"}>{description}</p>
-                <a href={`details/${id}`} className={"card-readmore"}>View more</a>
+                <Link to={`/est/${id}`} className={"card-readmore"}>View more</Link>
             </div>
         </div>
     );

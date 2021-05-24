@@ -46,25 +46,25 @@ const ContactForm = () => {
                         <div className='form-group'>
                             <label htmlFor="sent_by_name">Name:</label>
                             <input name="sent_by_name" ref={register} type='text' />
-                            {errors.sent_by_name && <p>{errors.sent_by_name.message}</p>}
+                            {errors.sent_by_name && <p className="error">{errors.sent_by_name.message}</p>}
                         </div>
 
                         <div className='form-group'>
                             <label htmlFor="sent_by_mail">Email:</label>
                             <input name="sent_by_mail" ref={register} type='text' />
-                            {errors.sent_by_mail && <p>{errors.sent_by_mail.message}</p>}
+                            {errors.sent_by_mail && <p className="error">{errors.sent_by_mail.message}</p>}
                         </div>
 
                         <div className='form-group'>
                             <label htmlFor="subject">Subject:</label>
                             <input name="subject" ref={register} type='text' />
-                            {errors.subject && <p>{errors.subject.message}</p>}
+                            {errors.subject && <p className="error">{errors.subject.message}</p>}
                         </div>
 
                         <div className='form-group'>
                             <label htmlFor="message">Message:</label>
                             <textarea name="message" ref={register} type='text' />
-                            {errors.message && <p>{errors.message.message}</p>}
+                            {errors.message && <p className="error">{errors.message.message}</p>}
                         </div>
                         <div className="form-group">
                             <button className={"btn"} id="formButton">Send</button>
